@@ -31,7 +31,9 @@ const BLACKLIST_TERMS = [
     "al iraqia kurdish",
     "iraqia kurdish",
     "kurmanji",
-    "kurmanci"
+    "kurmanci",
+    "nrt 720p",
+    "not 24/7"
 ];
 
 function isBlacklisted(name, url) {
@@ -71,9 +73,8 @@ const CORE_CHANNELS = [
     { name: "Zoom TV Kurdish", logo: "https://t4.ftcdn.net/jpg/03/88/22/21/360_F_388222175_D6PTsMoUyegpPJ63zvkecPsZAttc95mD.jpg", url: atob("aHR0cHM6Ly9saXZlLnpvb21uZXdzLmluZm8vbGl2ZS9ab29tX3BsYXlsaXN0Lm0zdTg="), category: "News", type: "tv", secure: true },
     { name: "Avar TV", logo: "https://i.imgur.com/JazFBkW.jpeg", url: atob("aHR0cHM6Ly9hdnIuaG9zdDI0Ny5uZXQvbGl2ZS9BdmFyVHYvcGxheWxpc3QubTN1OA=="), category: "General", type: "tv", secure: true },
     
-    // Popular Kurdish Sports Channels
-    { name: "Ava Sports", logo: "https://i.imgur.com/me5igxY.jpg", url: atob("aHR0cHM6Ly9mYW1pbHlobHMuYXZhdHYubGl2ZS9obHMvc3RyZWFtLm0zdTg="), externalUrl: atob("aHR0cHM6Ly9hdmFtZWRpYS50di8="), category: "Sports", type: "tv", secure: true },
-    { name: "NRT Sports", logo: "https://i.imgur.com/4li5hRA.png", url: atob("aHR0cHM6Ly9ucnR0di5jb20vbnJ0LXNwb3J0cy1wbGFjZWhvbGRlci5tM3U4"), externalUrl: atob("aHR0cHM6Ly9ucnR0di5jb20vY2hhbm5lbC9ucnQtc3BvcnRz"), category: "Sports", type: "tv", secure: true },
+    // Popular Sports Channels
+    { name: "beIN Sports XTRA", logo: "https://i.ibb.co/HT49GPmB/XTRA-2.png", url: atob("aHR0cHM6Ly9iZWluLXh0cmEtYmVpbi5hbWFnaS50di9wbGF5bGlzdC5tM3U4"), category: "Sports", type: "tv", secure: true },
     { name: "Yariga TV", logo: "https://yariga.net/wp-content/uploads/2023/04/cropped-favicon-192x192.png", url: atob("aHR0cHM6Ly95YXJpZ2EubmV0L3lhcmlnYS10di1wbGFjZWhvbGRlci5tM3U4"), externalUrl: atob("aHR0cHM6Ly95YXJpZ2EubmV0Lw=="), category: "Sports", type: "tv", secure: true },
 ];
 
