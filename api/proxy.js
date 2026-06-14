@@ -75,11 +75,25 @@ export default async function handler(req, res) {
             const baseUrl = new URL(targetUrl);
             const rewritten = text.split('\n').map(line => {
                 const trimmed = line.trim();
-                if (trimmed.startsWith('#') || trimmed === '') return line;
+                if (trimmed === '') return line;
+                
+                // Rewrite URI="..." inside tags like #EXT-X-MEDIA
+                if (trimmed.startsWith('#')) {
+                    return trimmed.replace(/URI="([^"]+)"/g, (match, uri) => {
+                        try {
+                            const abs = new URL(uri, baseUrl).href;
+                            return `URI="/api/proxy?url=${encodeURIComponent(abs)}"`;
+                        } catch (e) {
+                            return match;
+                        }
+                    });
+                }
+                
                 // Rewrite absolute URLs
                 if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
                     return '/api/proxy?url=' + encodeURIComponent(trimmed);
                 }
+                
                 // Rewrite relative URLs to absolute then proxy
                 try {
                     const abs = new URL(trimmed, baseUrl).href;
