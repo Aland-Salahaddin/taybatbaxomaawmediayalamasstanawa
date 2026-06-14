@@ -245,7 +245,7 @@ function mergeChannelsList(newList) {
 
 function updateUI() {
     // 1. Update count
-    streamsCountLabel.textContent = `${allChannels.length} Channels / Radios Active`;
+    streamsCountLabel.textContent = `${allChannels.length} Channels Active`;
 
     // 2. Clear grid
     gridContainer.innerHTML = '';
