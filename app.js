@@ -73,9 +73,12 @@ const CORE_CHANNELS = [
     { name: "Zoom TV Kurdish", logo: "https://t4.ftcdn.net/jpg/03/88/22/21/360_F_388222175_D6PTsMoUyegpPJ63zvkecPsZAttc95mD.jpg", url: atob("aHR0cHM6Ly9saXZlLnpvb21uZXdzLmluZm8vbGl2ZS9ab29tX3BsYXlsaXN0Lm0zdTg="), category: "News", type: "tv", secure: true },
     { name: "Avar TV", logo: "https://i.imgur.com/JazFBkW.jpeg", url: atob("aHR0cHM6Ly9hdnIuaG9zdDI0Ny5uZXQvbGl2ZS9BdmFyVHYvcGxheWxpc3QubTN1OA=="), category: "General", type: "tv", secure: true },
     
-    // Popular Sports Channels
-    { name: "beIN Sports XTRA", logo: "https://i.ibb.co/HT49GPmB/XTRA-2.png", url: atob("aHR0cHM6Ly9iZWluLXh0cmEtYmVpbi5hbWFnaS50di9wbGF5bGlzdC5tM3U4"), category: "Sports", type: "tv", secure: true },
-    { name: "Yariga TV", logo: "https://yariga.net/wp-content/uploads/2023/04/cropped-favicon-192x192.png", url: atob("aHR0cHM6Ly95YXJpZ2EubmV0L3lhcmlnYS10di1wbGFjZWhvbGRlci5tM3U4"), externalUrl: atob("aHR0cHM6Ly95YXJpZ2EubmV0Lw=="), category: "Sports", type: "tv", secure: true },
+    // International Football Channels (کەناڵە جیهانیەکانی تۆپی پێ)
+    { name: "Alkass One", logo: "https://i.imgur.com/10mmlha.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczEtcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
+    { name: "Alkass Two", logo: "https://i.imgur.com/8w61kFX.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczItcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
+    { name: "Alkass Three", logo: "https://i.imgur.com/d57BdFh.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczMtcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
+    { name: "Alkass Four", logo: "https://i.imgur.com/iDL65Wu.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczQtcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
+    { name: "Alkass Five", logo: "https://i.imgur.com/6RGNGsM.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczUtcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
 ];
 
 // App State Management
