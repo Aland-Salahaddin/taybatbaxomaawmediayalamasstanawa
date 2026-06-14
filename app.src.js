@@ -112,14 +112,7 @@ const videoLoader = document.getElementById('video-loader');
 const videoErrorMsg = document.getElementById('video-error-msg');
 const videoErrorText = document.getElementById('video-error-text');
 
-// Import Modal UI Elements
-const importModal = document.getElementById('import-modal');
-const btnImportTrigger = document.getElementById('btn-import-trigger');
-const btnCloseImport = document.getElementById('btn-close-import');
-const btnImportUrl = document.getElementById('btn-import-url');
-const playlistUrlInput = document.getElementById('playlist-url');
-const fileDropArea = document.getElementById('file-drop-area');
-const playlistFileInput = document.getElementById('playlist-file');
+
 
 /* ==========================================
    1. Initialization & Dynamic Fetching
@@ -640,91 +633,9 @@ function setupEventListeners() {
             stopVideo();
         }
     });
-
-    // Import Playlist Modal Triggers
-    btnImportTrigger.addEventListener('click', () => {
-        importModal.classList.add('active');
-    });
-
-    btnCloseImport.addEventListener('click', () => {
-        importModal.classList.remove('active');
-    });
-
-    importModal.addEventListener('click', (e) => {
-        if (e.target === importModal) {
-            importModal.classList.remove('active');
-        }
-    });
-
-    // Online URL M3U Import Handler
-    btnImportUrl.addEventListener('click', async () => {
-        const url = playlistUrlInput.value.trim();
-        if (!url) return showToast('Please enter a valid URL!', 'error');
-        
-        try {
-            btnImportUrl.textContent = 'Loading...';
-            btnImportUrl.disabled = true;
-            
-            // Route through proxy to bypass CORS
-            const proxyUrl = '/api/proxy?url=' + encodeURIComponent(url);
-            const res = await fetch(proxyUrl);
-            if (!res.ok) throw new Error('Status ' + res.status);
-            const text = await res.text();
-            if (!text.includes('#EXTM3U') && !text.includes('#EXTINF')) throw new Error('Not a valid M3U file');
-            
-            parseAndMergeM3U(text, 'tv');
-            
-            playlistUrlInput.value = '';
-            importModal.classList.remove('active');
-            showToast('M3U playlist loaded successfully! ✓');
-        } catch (e) {
-            showToast('Failed to load playlist: ' + e.message, 'error');
-        } finally {
-            btnImportUrl.textContent = 'Load URL';
-            btnImportUrl.disabled = false;
-        }
-    });
-
-    // Local file drop or select M3U Import Handler
-    playlistFileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) handleFileImport(file);
-    });
-
-    fileDropArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        fileDropArea.classList.add('drag-over');
-    });
-
-    fileDropArea.addEventListener('dragleave', () => {
-        fileDropArea.classList.remove('drag-over');
-    });
-
-    fileDropArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        fileDropArea.classList.remove('drag-over');
-        const file = e.dataTransfer.files[0];
-        if (file) handleFileImport(file);
-    });
 }
 
-function handleFileImport(file) {
-    if (!file.name.endsWith('.m3u') && !file.name.endsWith('.m3u8')) {
-        return showToast('Please select only .m3u or .m3u8 files!', 'error');
-    }
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        const content = e.target.result;
-        parseAndMergeM3U(content, 'tv');
-        importModal.classList.remove('active');
-        showToast(`File "${file.name}" loaded successfully! ✓`);
-    };
-    reader.onerror = () => {
-        showToast('Error reading the file.', 'error');
-    };
-    reader.readAsText(file);
-}
 
 /* ==========================================
    5. Security & Privacy Protections

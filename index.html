@@ -59,12 +59,6 @@
                 </button>
             </nav>
 
-            <div class="sidebar-footer">
-                <button class="btn btn-primary" id="btn-import-trigger">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"></path></svg>
-                    <span>Import M3U</span>
-                </button>
-            </div>
         </aside>
 
         <!-- Main Content Area -->
@@ -149,42 +143,7 @@
         </div>
     </div>
 
-    <!-- Import Playlist Modal Overlay -->
-    <div class="playlist-modal-overlay" id="import-modal">
-        <div class="playlist-modal-container">
-            <header class="playlist-modal-header">
-                <h3>Import M3U Playlist</h3>
-                <button class="modal-close-btn" id="btn-close-import">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-            </header>
-            
-            <div class="playlist-modal-body">
-                <p class="modal-intro">Add custom HLS live streams or import your own private IPTV M3U playlists.</p>
-                
-                <div class="import-option">
-                    <label for="playlist-url">Remote M3U Playlist URL</label>
-                    <div class="input-group">
-                        <input type="url" id="playlist-url" placeholder="https://example.com/playlist.m3u">
-                        <button class="btn btn-secondary" id="btn-import-url">Load URL</button>
-                    </div>
-                </div>
 
-                <div class="import-divider">
-                    <span>OR</span>
-                </div>
-
-                <div class="import-option">
-                    <label>Select M3U File from Computer</label>
-                    <div class="file-drop-area" id="file-drop-area">
-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"></path></svg>
-                        <span>Drag & drop an .m3u file here or click to select</span>
-                        <input type="file" id="playlist-file" accept=".m3u,.m3u8">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- JS Link -->
     <script src="app.js"></script>
