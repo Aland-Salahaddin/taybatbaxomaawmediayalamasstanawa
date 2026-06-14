@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KurdMedia - Live Kurdish TV & Radio Streaming</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Stream your favorite Kurdish TV channels and radio stations live. Free, fast, and high-quality access to Rudaw, Kurdsat, Channel 8, and more.">
+    <meta name="keywords" content="Kurdish TV, Kurdish Radio, Rudaw Live, Kurdsat, NRT TV, Kurdish Streaming, Kurdish Music, Babylon FM">
+    <meta name="author" content="KurdMedia">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="KurdMedia - Live Kurdish TV & Radio Streaming">
+    <meta property="og:description" content="Stream your favorite Kurdish TV channels and radio stations live. Free, fast, and high-quality.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- HLS.js for streaming compatibility in browsers without native HLS support -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js"></script>
+</head>
+<body>
+    <!-- Starry background particle effect container -->
+    <div id="stars-container"></div>
+    <div class="glow-orb red-orb"></div>
+    <div class="glow-orb green-orb"></div>
+    <div class="glow-orb yellow-orb"></div>
+
+    <!-- Application Shell -->
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 24 24" width="28" height="28">
+                        <path fill="var(--kurd-yellow)" d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm1,14.5a1,1,0,0,1-2,0V11a1,1,0,0,1,2,0Zm0-5.5a1,1,0,0,1-2,0V8a1,1,0,0,1,2,0Z"/>
+                        <circle cx="12" cy="12" r="5" fill="none" stroke="var(--kurd-red)" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h1>KurdMedia</h1>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <button class="menu-item active" id="nav-all">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg>
+                    <span>All Media</span>
+                </button>
+                <button class="menu-item" id="nav-tv">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                    <span>Live TV</span>
+                </button>
+
+                <button class="menu-item" id="nav-favorites">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <span>Favorites</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-primary" id="btn-import-trigger">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"></path></svg>
+                    <span>Import M3U</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Header bar -->
+            <header class="app-header">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="search-input" placeholder="Search channels or radio stations...">
+                </div>
+                
+                <div class="header-actions">
+                    <div class="status-indicator">
+                        <span class="status-dot online"></span>
+                        <span id="streams-count">Loading...</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Filters & Category Navigation -->
+            <section class="filters-bar">
+                <div class="category-filters" id="category-filters-container">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="News">News</button>
+                    <button class="filter-btn" data-category="Entertainment">Show / Drama</button>
+                    <button class="filter-btn" data-category="Kids">Kids</button>
+                    <button class="filter-btn" data-category="Music">Music</button>
+                    <button class="filter-btn" data-category="Sports">Sports</button>
+                    <button class="filter-btn" data-category="General">General</button>
+                </div>
+            </section>
+
+            <!-- Channels Grid -->
+            <section class="grid-section">
+                <div class="channels-grid" id="channels-grid-container">
+                    <!-- Cards will be dynamically inserted here -->
+                </div>
+                
+                <!-- Empty State -->
+                <div class="empty-state" id="empty-state">
+                    <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                    <h3>No Channels Found</h3>
+                    <p>We couldn't find any channels matching your search or filters.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+
+
+    <!-- TV Video Stream Modal Overlay -->
+    <div class="video-modal-overlay" id="video-modal">
+        <div class="video-modal-container">
+            <header class="video-modal-header">
+                <div class="modal-channel-info">
+                    <img id="modal-logo" src="" alt="Channel Logo" onerror="this.src='placeholder.png'">
+                    <div>
+                        <h3 id="modal-title">Channel Name</h3>
+                        <span id="modal-category" class="badge">News</span>
+                    </div>
+                </div>
+                <button class="modal-close-btn" id="btn-close-video">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </header>
+            
+            <div class="video-wrapper">
+                <video id="hls-video" controls autoplay playsinline></video>
+                <div class="video-loader" id="video-loader">
+                    <div class="spinner"></div>
+                    <span>Loading Live Stream...</span>
+                </div>
+                <div class="video-error-message" id="video-error-msg">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#ff4a4a" stroke-width="2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    <h4>Playback Failed</h4>
+                    <p id="video-error-text">This stream cannot be played, likely due to network issues or browser CORS blocks.</p>
+                    <a id="btn-open-external" href="#" target="_blank" class="btn btn-secondary" style="margin-top: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span>Open in Browser</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Playlist Modal Overlay -->
+    <div class="playlist-modal-overlay" id="import-modal">
+        <div class="playlist-modal-container">
+            <header class="playlist-modal-header">
+                <h3>Import M3U Playlist</h3>
+                <button class="modal-close-btn" id="btn-close-import">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </header>
+            
+            <div class="playlist-modal-body">
+                <p class="modal-intro">Add custom HLS live streams or import your own private IPTV M3U playlists.</p>
+                
+                <div class="import-option">
+                    <label for="playlist-url">Remote M3U Playlist URL</label>
+                    <div class="input-group">
+                        <input type="url" id="playlist-url" placeholder="https://example.com/playlist.m3u">
+                        <button class="btn btn-secondary" id="btn-import-url">Load URL</button>
+                    </div>
+                </div>
+
+                <div class="import-divider">
+                    <span>OR</span>
+                </div>
+
+                <div class="import-option">
+                    <label>Select M3U File from Computer</label>
+                    <div class="file-drop-area" id="file-drop-area">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"></path></svg>
+                        <span>Drag & drop an .m3u file here or click to select</span>
+                        <input type="file" id="playlist-file" accept=".m3u,.m3u8">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Link -->
+    <script src="app.js"></script>
+</body>
+</html>
