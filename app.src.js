@@ -33,7 +33,8 @@ const BLACKLIST_TERMS = [
     "kurmanji",
     "kurmanci",
     "nrt 720p",
-    "not 24/7"
+    "not 24/7",
+    "zoom tv"
 ];
 
 function isBlacklisted(name, url) {
