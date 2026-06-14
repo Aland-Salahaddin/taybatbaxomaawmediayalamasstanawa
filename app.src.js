@@ -137,7 +137,7 @@ function showToast(message, type = 'info') {
         animation:fadeInDown 0.3s ease;
     `;
     toast.innerHTML = `
-        <span style="font-size:11px;font-weight:600;color:#e2a227;letter-spacing:1px;">ShuttyMedia</span>
+        <span style="font-size:11px;font-weight:600;color:#e2a227;letter-spacing:1px;">ShutyMedia</span>
         <span>${message}</span>
     `;
     document.body.appendChild(toast);
@@ -303,6 +303,19 @@ function updateUI() {
 
     // 4. Handle Empty State
     if (filtered.length === 0) {
+        if (activeTab === 'favorites') {
+            emptyState.innerHTML = `
+                <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <h3>No Favorites Yet</h3>
+                <p>You haven't added any channels to your favorites. Click the heart icon on a channel to save it here.</p>
+            `;
+        } else {
+            emptyState.innerHTML = `
+                <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                <h3>No Channels Found</h3>
+                <p>We couldn't find any channels matching your search or filters.</p>
+            `;
+        }
         emptyState.style.display = 'flex';
     } else {
         emptyState.style.display = 'none';
