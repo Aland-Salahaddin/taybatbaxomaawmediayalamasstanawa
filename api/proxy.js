@@ -1,4 +1,5 @@
-// Vercel Serverless Proxy - Bypasses CORS for allowed CDN domains
+// Vercel Serverless Proxy - Bypasses CORS for stream CDN domains
+// Also allows any HTTPS source for M3U playlist imports
 const ALLOWED_DOMAINS = [
     'alkassdigital.net',
     'akamaized.net',
@@ -8,6 +9,10 @@ const ALLOWED_DOMAINS = [
     'host247.net',
     'streambrothers.com',
     'zoomnews.info',
+    'karwan.tv',
+    'github.io',
+    'githubusercontent.com',
+    'raw.githubusercontent.com',
     'channel8.com',
     'avamedia.tv',
     'avatv.live',

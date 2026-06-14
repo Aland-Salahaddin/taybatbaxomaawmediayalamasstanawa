@@ -142,7 +142,7 @@ function showToast(message, type = 'info') {
         animation:fadeInDown 0.3s ease;
     `;
     toast.innerHTML = `
-        <span style="font-size:11px;font-weight:600;color:#e2a227;letter-spacing:1px;text-transform:uppercase;">ShuttyMedia</span>
+        <span style="font-size:11px;font-weight:600;color:#e2a227;letter-spacing:1px;">ShuttyMedia</span>
         <span>${message}</span>
     `;
     document.body.appendChild(toast);
