@@ -34,7 +34,10 @@ const BLACKLIST_TERMS = [
     "kurmanci",
     "nrt 720p",
     "not 24/7",
-    "zoom tv"
+    "zoom tv",
+    "alkass two",
+    "alkass three",
+    "alkass five"
 ];
 
 function isBlacklisted(name, url) {
@@ -75,10 +78,7 @@ const CORE_CHANNELS = [
     
     // International Football Channels (┌⌐█ò┘å╪º┌╡█ò ╪¼█î┘ç╪º┘å█î█ò┌⌐╪º┘å█î ╪¬█å┘╛█î ┘╛█Ä)
     { name: "Alkass One", logo: "https://i.imgur.com/10mmlha.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczEtcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
-    { name: "Alkass Two", logo: "https://i.imgur.com/8w61kFX.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczItcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
-    { name: "Alkass Three", logo: "https://i.imgur.com/d57BdFh.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczMtcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
     { name: "Alkass Four", logo: "https://i.imgur.com/iDL65Wu.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczQtcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
-    { name: "Alkass Five", logo: "https://i.imgur.com/6RGNGsM.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczUtcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
 ];
 
 // App State Management
