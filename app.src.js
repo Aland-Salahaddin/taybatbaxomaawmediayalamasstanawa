@@ -123,6 +123,33 @@ const playlistFileInput = document.getElementById('playlist-file');
    1. Initialization & Dynamic Fetching
    ========================================== */
 
+/* Custom toast notification (replaces browser alert()) */
+function showToast(message, type = 'info') {
+    const existing = document.getElementById('sm-toast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.id = 'sm-toast';
+    toast.style.cssText = `
+        position:fixed;top:24px;left:50%;transform:translateX(-50%);
+        background:${type === 'error' ? '#c0392b' : '#1a1d2e'};
+        border:1px solid ${type === 'error' ? '#e74c3c' : 'rgba(226,162,39,0.4)'};
+        color:#fff;padding:14px 24px;border-radius:12px;
+        font-family:'Outfit',sans-serif;font-size:14px;
+        box-shadow:0 8px 32px rgba(0,0,0,0.5);
+        z-index:99999;max-width:400px;text-align:center;
+        display:flex;flex-direction:column;gap:4px;
+        animation:fadeInDown 0.3s ease;
+    `;
+    toast.innerHTML = `
+        <span style="font-size:11px;font-weight:600;color:#e2a227;letter-spacing:1px;text-transform:uppercase;">ShuttyMedia</span>
+        <span>${message}</span>
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.style.opacity = '0', 2700);
+    setTimeout(() => toast.remove(), 3000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     generateStarfield();
     setupEventListeners();
@@ -630,23 +657,26 @@ function setupEventListeners() {
     // Online URL M3U Import Handler
     btnImportUrl.addEventListener('click', async () => {
         const url = playlistUrlInput.value.trim();
-        if (!url) return alert('Please enter a valid URL!');
+        if (!url) return showToast('Please enter a valid URL!', 'error');
         
         try {
             btnImportUrl.textContent = 'Loading...';
             btnImportUrl.disabled = true;
             
-            const res = await fetch(url);
-            if (!res.ok) throw new Error();
+            // Route through proxy to bypass CORS
+            const proxyUrl = '/api/proxy?url=' + encodeURIComponent(url);
+            const res = await fetch(proxyUrl);
+            if (!res.ok) throw new Error('Status ' + res.status);
             const text = await res.text();
+            if (!text.includes('#EXTM3U') && !text.includes('#EXTINF')) throw new Error('Not a valid M3U file');
             
             parseAndMergeM3U(text, 'tv');
             
             playlistUrlInput.value = '';
             importModal.classList.remove('active');
-            alert('M3U playlist loaded successfully!');
+            showToast('M3U playlist loaded successfully! ✓');
         } catch (e) {
-            alert('Failed to load playlist. It may be due to CORS issues. Try downloading the .m3u file and uploading it directly instead.');
+            showToast('Failed to load playlist: ' + e.message, 'error');
         } finally {
             btnImportUrl.textContent = 'Load URL';
             btnImportUrl.disabled = false;
@@ -678,7 +708,7 @@ function setupEventListeners() {
 
 function handleFileImport(file) {
     if (!file.name.endsWith('.m3u') && !file.name.endsWith('.m3u8')) {
-        return alert('Please select only .m3u or .m3u8 files!');
+        return showToast('Please select only .m3u or .m3u8 files!', 'error');
     }
 
     const reader = new FileReader();
@@ -686,10 +716,10 @@ function handleFileImport(file) {
         const content = e.target.result;
         parseAndMergeM3U(content, 'tv');
         importModal.classList.remove('active');
-        alert(`File "${file.name}" loaded successfully!`);
+        showToast(`File "${file.name}" loaded successfully! ✓`);
     };
     reader.onerror = () => {
-        alert('Error reading the file.');
+        showToast('Error reading the file.', 'error');
     };
     reader.readAsText(file);
 }
