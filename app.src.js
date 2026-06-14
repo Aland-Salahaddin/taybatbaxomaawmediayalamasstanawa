@@ -66,7 +66,7 @@ function isBlacklisted(name, url) {
 const CORE_CHANNELS = [
     // Predefined TV Channels (Sorani News & Entertainment)
     { name: "Rudaw TV (HD)", logo: "https://i.imgur.com/Zo3IWOn.png", url: atob("aHR0cHM6Ly9saXZlLnJ1ZGF3Lm5ldC9obHMvcnVkYXctdHYvbWFzdGVyLm0zdTg="), category: "News", type: "tv", secure: true },
-    { name: "Kurdsat TV (HD)", logo: "https://i.imgur.com/UAbSwYA.png", url: atob("aHR0cHM6Ly9obHNwYWNrYWdlci5ha2FtYWl6ZWQubmV0L2xpdmUvREIvS1VSRFNBVF9IRC9ITFMvS1VSRFNBVF9IRC1hdmMxXzI1MDAwMDA9MTAwMDIubTN1OA=="), category: "Entertainment", type: "tv", secure: true },
+    { name: "Kurdsat TV (HD)", logo: "https://i.imgur.com/UAbSwYA.png", url: atob("aHR0cHM6Ly9obHNwYWNrYWdlci5ha2FtYWl6ZWQubmV0L2xpdmUvREIvS1VSRFNBVF9IRC9ITFMvS1VSRFNBVF9IRC5tM3U4"), category: "Entertainment", type: "tv", secure: true },
     { name: "Kurdsat News", logo: "https://i.imgur.com/F3XRwkt.png", url: atob("aHR0cHM6Ly9obHNwYWNrYWdlci5ha2FtYWl6ZWQubmV0L2xpdmUvREIvS1VSRFNBVF9ORVdTL0hMUy9LVVJEU0FUX05FV1MubTN1OA=="), category: "News", type: "tv", secure: true },
     { name: "Channel 8 Kurdish", logo: "assets/channel8.webp", url: atob("aHR0cHM6Ly9saXZlLmNoYW5uZWw4LmNvbS9DaGFubmVsOC1LdXJkaXNoL2luZGV4LmZtcDQubTN1OA=="), category: "News", type: "tv", secure: true },
     { name: "Ava TV", logo: "https://ava.news/apple-touch-icon.png", url: atob("aHR0cHM6Ly9hdmExLnN0b3JlL3VwbG9hZC9hdmEubTN1OA=="), altUrls: [atob("aHR0cHM6Ly9hdmEzLnN0b3JlL3VwbG9hZC9hdmEubTN1OA=="), atob("aHR0cHM6Ly9hdmE0LnN0b3JlL3VwbG9hZC9hdmEubTN1OA==")], category: "General", type: "tv", secure: true },
