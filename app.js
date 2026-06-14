@@ -82,7 +82,7 @@ const CORE_CHANNELS = [
 let allChannels = [...CORE_CHANNELS];
 let favoriteChannels = (JSON.parse(localStorage.getItem('kurdmedia_favorites')) || [])
     .filter(fav => !isBlacklisted(fav.name, fav.url));
-let activeTab = 'all'; // all, tv, radio, favorites
+let activeTab = 'tv'; // tv, favorites
 let activeCategory = 'all';
 let searchQuery = '';
 
@@ -527,7 +527,6 @@ function stopVideo() {
 function setupEventListeners() {
     // Navigation Tab Toggles
     const navButtons = {
-        'nav-all': 'all',
         'nav-tv': 'tv',
         'nav-favorites': 'favorites'
     };
