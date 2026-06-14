@@ -70,7 +70,6 @@ const CORE_CHANNELS = [
     { name: "EmanTv", logo: "https://i.imgur.com/QmgaPSi.png", url: atob("aHR0cHM6Ly9hdnIuaG9zdDI0Ny5uZXQvbGl2ZS9lbWFudHYvcGxheWxpc3QubTN1OA=="), category: "General", type: "tv", secure: true },
     { name: "FarmodaTV", logo: "https://i.imgur.com/x4KCQlH.png", url: atob("aHR0cHM6Ly9hdnIuaG9zdDI0Ny5uZXQvbGl2ZS9GYXJtb2RhVFYvcGxheWxpc3QubTN1OA=="), category: "General", type: "tv", secure: true },
     { name: "Payam TV", logo: "https://i.imgur.com/qySEibb.png", url: atob("aHR0cHM6Ly9tZWRpYTIuc3RyZWFtYnJvdGhlcnMuY29tOjE5MzYvODIxOC84MjE4L3BsYXlsaXN0Lm0zdTg="), category: "News", type: "tv", secure: true },
-    { name: "Zoom TV Kurdish", logo: "https://t4.ftcdn.net/jpg/03/88/22/21/360_F_388222175_D6PTsMoUyegpPJ63zvkecPsZAttc95mD.jpg", url: atob("aHR0cHM6Ly9saXZlLnpvb21uZXdzLmluZm8vbGl2ZS9ab29tX3BsYXlsaXN0Lm0zdTg="), category: "News", type: "tv", secure: true },
     { name: "Avar TV", logo: "https://i.imgur.com/JazFBkW.jpeg", url: atob("aHR0cHM6Ly9hdnIuaG9zdDI0Ny5uZXQvbGl2ZS9BdmFyVHYvcGxheWxpc3QubTN1OA=="), category: "General", type: "tv", secure: true },
     
     // International Football Channels (┌⌐█ò┘å╪º┌╡█ò ╪¼█î┘ç╪º┘å█î█ò┌⌐╪º┘å█î ╪¬█å┘╛█î ┘╛█Ä)
