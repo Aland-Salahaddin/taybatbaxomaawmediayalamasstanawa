@@ -26,7 +26,8 @@ const ALLOWED_DOMAINS = [
     '23.237.104.106',
     'bozztv.com',
     'jmp2.uk',
-    'uplynk.com'
+    'uplynk.com',
+    'oottoo.online'
 ];
 
 export default async function handler(req, res) {
