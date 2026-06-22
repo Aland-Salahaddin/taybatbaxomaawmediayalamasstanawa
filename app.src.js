@@ -84,6 +84,7 @@ const CORE_CHANNELS = [
     { name: "beIN SPORTS XTRA", logo: "https://i.ibb.co/HT49GPmB/XTRA-2.png", url: atob("aHR0cHM6Ly9iZWluLXh0cmEtYmVpbi5hbWFnaS50di9wbGF5bGlzdC5tM3U4"), category: "Sports", type: "tv", secure: true },
     { name: "beIN Sports XTRA Español", logo: "https://i.imgur.com/V562tpO.png", url: atob("aHR0cHM6Ly9kYzE2NDRhOWphemdqLmNsb3VkZnJvbnQubmV0L2JlSU5fU3BvcnRzX1h0cmFfRXNwYW5vbC5tM3U4"), category: "Sports", type: "tv", secure: true },
     { name: "beIN Sports USA", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/BeIN_Sports_logo_%28vertical_version%29.svg/500px-BeIN_Sports_logo_%28vertical_version%29.svg.png", url: atob("aHR0cDovLzIzLjIzNy4xMDQuMTA2OjgwODAvVVNBX0JFSU4vaW5kZXgubTN1OA=="), category: "Sports", type: "tv", secure: true },
+    { name: "NRT Sport", logo: "https://rashaba.com/assets/images/ch_logo/nrt_sport_v1.webp", url: atob("aHR0cHM6Ly8xODMuYm96enR2LmNvbS9naWF0di9naWF0di1OUlQtU1BPUlQvTlJULVNQT1JUL3BsYXlsaXN0Lm0zdTg="), category: "Sports", type: "tv", secure: true },
 ];
 
 // App State Management
@@ -464,7 +465,8 @@ function loadHlsStream(url, chan) {
             'zoomnews.info',
             'amagi.tv',
             'cloudfront.net',
-            '23.237.104.106'
+            '23.237.104.106',
+            'bozztv.com'
         ];
 
         function needsProxy(u) {

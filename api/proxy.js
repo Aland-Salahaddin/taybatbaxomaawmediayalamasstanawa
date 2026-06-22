@@ -23,7 +23,8 @@ const ALLOWED_DOMAINS = [
     'avatv.live',
     'amagi.tv',
     'cloudfront.net',
-    '23.237.104.106'
+    '23.237.104.106',
+    'bozztv.com'
 ];
 
 export default async function handler(req, res) {
