@@ -27,7 +27,8 @@ const ALLOWED_DOMAINS = [
     'bozztv.com',
     'jmp2.uk',
     'uplynk.com',
-    'oottoo.online'
+    'oottoo.online',
+    'daioncdn.net'
 ];
 
 export default async function handler(req, res) {

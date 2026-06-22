@@ -88,6 +88,7 @@ const CORE_CHANNELS = [
     { name: "NRT Sport", logo: "assets/nrtsport.png", url: atob("aHR0cHM6Ly8xODMuYm96enR2LmNvbS9naWF0di9naWF0di1OUlQtU1BPUlQvTlJULVNQT1JUL3BsYXlsaXN0Lm0zdTg="), category: "Sports", type: "tv", secure: true },
     { name: "FOX Sports (World Cup)", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/FOX_Sports_logo.svg/960px-FOX_Sports_logo.svg.png", url: atob("aHR0cHM6Ly9qbXAyLnVrL3BsdS01YTc0YjhlMWUyMmE2MTczNzk3OWM2YmYubTN1OA=="), category: "Sports", type: "tv", secure: true },
     { name: "Telemundo (World Cup)", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Telemundo_2018_logo.svg/512px-Telemundo_2018_logo.svg.png", url: atob("aHR0cHM6Ly9jb250ZW50LnVwbHluay5jb20vY2hhbm5lbC9iNmE5NmVkMzlkNjk0YWUxYjczOGZhYTk4Y2Y3ZGQzZi5tM3U4"), category: "Sports", type: "tv", secure: true },
+    { name: "TRT 1 (World Cup)", logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/TRT_1_logo.svg", url: atob("aHR0cHM6Ly90cnQuZGFpb25jZG4ubmV0L3RydC0xL21hc3Rlci5tM3U4P2FwcD13ZWI="), category: "Sports", type: "tv", secure: true },
 ];
 
 // App State Management
@@ -472,7 +473,8 @@ function loadHlsStream(url, chan) {
             'bozztv.com',
             'jmp2.uk',
             'uplynk.com',
-            'oottoo.online'
+            'oottoo.online',
+            'daioncdn.net'
         ];
 
         function needsProxy(u) {
