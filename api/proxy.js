@@ -24,7 +24,9 @@ const ALLOWED_DOMAINS = [
     'amagi.tv',
     'cloudfront.net',
     '23.237.104.106',
-    'bozztv.com'
+    'bozztv.com',
+    'jmp2.uk',
+    'uplynk.com'
 ];
 
 export default async function handler(req, res) {
