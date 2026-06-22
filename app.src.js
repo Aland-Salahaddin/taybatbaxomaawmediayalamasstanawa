@@ -78,9 +78,12 @@ const CORE_CHANNELS = [
     { name: "Payam TV", logo: "assets/payam.png", url: atob("aHR0cHM6Ly9tZWRpYTIuc3RyZWFtYnJvdGhlcnMuY29tOjE5MzYvODIxOC84MjE4L3BsYXlsaXN0Lm0zdTg="), category: "News", type: "tv", secure: true },
     { name: "Avar TV", logo: "https://i.imgur.com/JazFBkW.jpeg", url: atob("aHR0cHM6Ly9hdnIuaG9zdDI0Ny5uZXQvbGl2ZS9BdmFyVHYvcGxheWxpc3QubTN1OA=="), category: "General", type: "tv", secure: true },
     
-    // International Football Channels (┌⌐█ò┘å╪º┌╡█ò ╪¼█î┘ç╪º┘å█î█ò┌⌐╪º┘å█î ╪¬█å┘╛█î ┘╛█Ä)
+    // International Football Channels (کەناڵە جیهانییەکانی تۆپی پێ)
     { name: "Alkass One", logo: "https://i.imgur.com/10mmlha.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczEtcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
     { name: "Alkass Four", logo: "https://i.imgur.com/iDL65Wu.png", url: atob("aHR0cHM6Ly9saXZlZXUtZ2NwLmFsa2Fzc2RpZ2l0YWwubmV0L2Fsa2FzczQtcC9tYWluLm0zdTg="), category: "Sports", type: "tv", secure: true },
+    { name: "beIN SPORTS XTRA", logo: "https://i.ibb.co/HT49GPmB/XTRA-2.png", url: atob("aHR0cHM6Ly9iZWluLXh0cmEtYmVpbi5hbWFnaS50di9wbGF5bGlzdC5tM3U4"), category: "Sports", type: "tv", secure: true },
+    { name: "beIN Sports XTRA Español", logo: "https://i.imgur.com/V562tpO.png", url: atob("aHR0cHM6Ly9kYzE2NDRhOWphemdqLmNsb3VkZnJvbnQubmV0L2JlSU5fU3BvcnRzX1h0cmFfRXNwYW5vbC5tM3U4"), category: "Sports", type: "tv", secure: true },
+    { name: "beIN Sports USA", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/BeIN_Sports_logo_%28vertical_version%29.svg/500px-BeIN_Sports_logo_%28vertical_version%29.svg.png", url: atob("aHR0cDovLzIzLjIzNy4xMDQuMTA2OjgwODAvVVNBX0JFSU4vaW5kZXgubTN1OA=="), category: "Sports", type: "tv", secure: true },
 ];
 
 // App State Management
@@ -459,7 +462,9 @@ function loadHlsStream(url, chan) {
             'streamlockercdn.net',
             'streambrothers.com',
             'zoomnews.info',
-            'amagi.tv'
+            'amagi.tv',
+            'cloudfront.net',
+            '23.237.104.106'
         ];
 
         function needsProxy(u) {

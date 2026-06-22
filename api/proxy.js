@@ -21,7 +21,9 @@ const ALLOWED_DOMAINS = [
     'channel8.com',
     'avamedia.tv',
     'avatv.live',
-    'amagi.tv'
+    'amagi.tv',
+    'cloudfront.net',
+    '23.237.104.106'
 ];
 
 export default async function handler(req, res) {
