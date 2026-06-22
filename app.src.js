@@ -37,7 +37,8 @@ const BLACKLIST_TERMS = [
     "zoom tv",
     "alkass two",
     "alkass three",
-    "alkass five"
+    "alkass five",
+    "payam"
 ];
 
 function isBlacklisted(name, url) {
@@ -75,7 +76,6 @@ const CORE_CHANNELS = [
     { name: "Afarin Baxcha", logo: "https://i.postimg.cc/4xRkBDRx/Afarin-Baxcha-200.png", url: atob("aHR0cHM6Ly81ZGNhYmYwMjZiMTg4LnN0cmVhbWxvY2submV0L2FmYXJpblRWL2xpdmVzdHJlYW0vcGxheWxpc3QubTN1OA=="), category: "Kids", type: "tv", secure: true },
     { name: "EmanTv", logo: "https://i.imgur.com/QmgaPSi.png", url: atob("aHR0cHM6Ly9hdnIuaG9zdDI0Ny5uZXQvbGl2ZS9lbWFudHYvcGxheWxpc3QubTN1OA=="), category: "General", type: "tv", secure: true },
     { name: "FarmodaTV", logo: "https://i.imgur.com/x4KCQlH.png", url: atob("aHR0cHM6Ly9hdnIuaG9zdDI0Ny5uZXQvbGl2ZS9GYXJtb2RhVFYvcGxheWxpc3QubTN1OA=="), category: "General", type: "tv", secure: true },
-    { name: "Payam TV", logo: "assets/payam.png", url: atob("aHR0cHM6Ly9tZWRpYTIuc3RyZWFtYnJvdGhlcnMuY29tOjE5MzYvODIxOC84MjE4L3BsYXlsaXN0Lm0zdTg="), category: "News", type: "tv", secure: true },
     { name: "Avar TV", logo: "https://i.imgur.com/JazFBkW.jpeg", url: atob("aHR0cHM6Ly9hdnIuaG9zdDI0Ny5uZXQvbGl2ZS9BdmFyVHYvcGxheWxpc3QubTN1OA=="), category: "General", type: "tv", secure: true },
     
     // International Football Channels (کەناڵە جیهانییەکانی تۆپی پێ)
