@@ -7,8 +7,21 @@ const DB_PATH = IS_VERCEL
     ? '/tmp/analytics_db.json' 
     : path.join(process.cwd(), 'analytics_db.json');
 
-// Helper functions for JSON database operations
+// Helper functions for JSON database operations (local file or Vercel KV)
 async function readDb() {
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+        try {
+            const url = `${process.env.KV_REST_API_URL}/get/analytics_db`;
+            const response = await fetch(url, {
+                headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` }
+            });
+            const data = await response.json();
+            return data.result ? JSON.parse(data.result) : { sessions: [] };
+        } catch (e) {
+            console.error('Failed to read from Vercel KV:', e);
+            return { sessions: [] };
+        }
+    }
     try {
         const data = await fs.readFile(DB_PATH, 'utf-8');
         return JSON.parse(data);
@@ -19,6 +32,22 @@ async function readDb() {
 }
 
 async function writeDb(data) {
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+        try {
+            const url = process.env.KV_REST_API_URL;
+            await fetch(url, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(['SET', 'analytics_db', JSON.stringify(data)])
+            });
+            return;
+        } catch (e) {
+            console.error('Failed to write to Vercel KV:', e);
+        }
+    }
     try {
         await fs.writeFile(DB_PATH, JSON.stringify(data, null, 2), 'utf-8');
     } catch (e) {
@@ -133,8 +162,11 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: false, active: false });
     }
 
-    // Route 3: GET /api/analytics/stats
+    // Route 3: GET /api/analytics/stats (Only accessible locally!)
     if (url.includes('/stats') && req.method === 'GET') {
+        if (IS_VERCEL) {
+            return res.status(403).json({ error: 'Access denied. Stats are only viewable on local hosting.' });
+        }
         const db = await readDb();
         const now = Date.now();
 

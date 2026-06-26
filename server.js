@@ -2,6 +2,28 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs').promises;
+const fsSync = require('fs');
+
+// Load environment variables from .env file if it exists
+try {
+    const envPath = path.join(__dirname, '.env');
+    if (fsSync.existsSync(envPath)) {
+        const envConfig = fsSync.readFileSync(envPath, 'utf-8');
+        envConfig.split(/\r?\n/).forEach(line => {
+            const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+            if (match) {
+                const key = match[1];
+                let value = match[2] || '';
+                if (value.length > 0 && value.charAt(0) === '"' && value.charAt(value.length - 1) === '"') {
+                    value = value.substring(1, value.length - 1);
+                }
+                process.env[key] = value.trim();
+            }
+        });
+    }
+} catch (e) {
+    console.warn('Failed to load .env file:', e);
+}
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -18,8 +40,21 @@ app.get('/analytics', (req, res) => {
     res.sendFile(path.join(__dirname, 'analytics.html'));
 });
 
-// Helper functions for JSON database operations
+// Helper functions for JSON database operations (local file or Vercel KV)
 async function readDb() {
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+        try {
+            const url = `${process.env.KV_REST_API_URL}/get/analytics_db`;
+            const response = await fetch(url, {
+                headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` }
+            });
+            const data = await response.json();
+            return data.result ? JSON.parse(data.result) : { sessions: [] };
+        } catch (e) {
+            console.error('Failed to read from Vercel KV:', e);
+            return { sessions: [] };
+        }
+    }
     try {
         const data = await fs.readFile(DB_PATH, 'utf-8');
         return JSON.parse(data);
@@ -30,6 +65,22 @@ async function readDb() {
 }
 
 async function writeDb(data) {
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+        try {
+            const url = process.env.KV_REST_API_URL;
+            await fetch(url, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(['SET', 'analytics_db', JSON.stringify(data)])
+            });
+            return;
+        } catch (e) {
+            console.error('Failed to write to Vercel KV:', e);
+        }
+    }
     try {
         await fs.writeFile(DB_PATH, JSON.stringify(data, null, 2), 'utf-8');
     } catch (e) {
