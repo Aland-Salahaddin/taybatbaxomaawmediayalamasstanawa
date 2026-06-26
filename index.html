@@ -3,163 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShutyMedia - Live TV Streaming</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Stream live TV channels free and fast on ShutyMedia. Watch Kurdish news, sports, kids and entertainment channels live.">
-    <meta name="keywords" content="ShutyMedia, Kurdish TV, Live Streaming, Rudaw Live, Kurdsat, Sports Live, Alkass">
-    <meta name="author" content="ShutyMedia">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="ShutyMedia - Live TV Streaming">
-    <meta property="og:description" content="Stream live TV channels free and fast on ShutyMedia.">
-    
-    <!-- Google Fonts -->
+    <title>ShutyMedia - Temporarily Paused</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- CSS Link -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
-    <!-- HLS.js for streaming compatibility in browsers without native HLS support -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js"></script>
-
-    <!-- Vercel Web Analytics -->
-    <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
-
-    <!-- Vercel Speed Insights -->
-    <script>
-      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <style>
+        .maintenance-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+            z-index: 10;
+            position: relative;
+        }
+        .maintenance-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            max-width: 480px;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .lock-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 183, 3, 0.1);
+            color: var(--kurd-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 8px var(--kurd-yellow-glow));
+        }
+        .maintenance-card h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .maintenance-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .brand-logo-m {
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+    </style>
 </head>
 <body>
-    <!-- Starry background particle effect container -->
     <div id="stars-container"></div>
     <div class="glow-orb red-orb"></div>
-    <div class="glow-orb green-orb"></div>
-    <div class="glow-orb yellow-orb"></div>
+    <div class="glow-orb yellow-orb" style="opacity: 0.08;"></div>
 
-    <!-- Application Shell -->
-    <div class="app-container">
-        <!-- Sidebar Navigation -->
-        <aside class="app-sidebar">
-            <div class="sidebar-brand">
-                <div class="brand-logo">
-                    <img src="assets/new_logo_for_media.png" alt="ShutyMedia Logo" width="38" height="38" style="border-radius: 4px; object-fit: contain;">
-                </div>
-                <h1>ShutyMedia</h1>
+    <div class="maintenance-wrapper">
+        <div class="maintenance-card">
+            <img class="brand-logo-m" src="assets/new_logo_for_media.png" alt="ShutyMedia Logo" width="54" height="54">
+            
+            <div class="lock-icon">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
             </div>
             
-            <nav class="sidebar-menu">
-                <button class="menu-item active" id="nav-tv">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-                    <span>Live TV</span>
-                </button>
-
-                <button class="menu-item" id="nav-favorites">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                    <span>Favorites</span>
-                </button>
-
-                <button class="menu-item" id="nav-analytics" onclick="window.location.href='/analytics'">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                    <span>Analytics</span>
-                </button>
-            </nav>
-
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="app-main">
-            <!-- Header bar -->
-            <header class="app-header">
-                <div class="search-box">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    <input type="text" id="search-input" placeholder="Search channels...">
-                </div>
-                
-                <div class="header-actions">
-                    <div class="status-indicator">
-                        <span class="status-dot online"></span>
-                        <span id="streams-count">Loading...</span>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Filters & Category Navigation -->
-            <section class="filters-bar">
-                <div class="category-filters" id="category-filters-container">
-                    <button class="filter-btn active" data-category="all">All</button>
-                    <button class="filter-btn" data-category="News">News</button>
-                    <button class="filter-btn" data-category="Entertainment">Show / Drama</button>
-                    <button class="filter-btn" data-category="Kids">Kids</button>
-                    <button class="filter-btn" data-category="Sports">Sports</button>
-                    <button class="filter-btn" data-category="General">General</button>
-                </div>
-            </section>
-
-            <!-- Channels Grid -->
-            <section class="grid-section">
-                <div class="channels-grid" id="channels-grid-container">
-                    <!-- Cards will be dynamically inserted here -->
-                </div>
-                
-                <!-- Empty State -->
-                <div class="empty-state" id="empty-state">
-                    <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-                    <h3>No Channels Found</h3>
-                    <p>We couldn't find any channels matching your search or filters.</p>
-                </div>
-            </section>
-        </main>
-    </div>
-
-
-
-    <!-- TV Video Stream Modal Overlay -->
-    <div class="video-modal-overlay" id="video-modal">
-        <div class="video-modal-container">
-            <header class="video-modal-header">
-                <div class="modal-channel-info">
-                    <img id="modal-logo" src="" alt="Channel Logo" onerror="this.src='placeholder.png'">
-                    <div>
-                        <h3 id="modal-title">Channel Name</h3>
-                        <span id="modal-category" class="badge">News</span>
-                    </div>
-                </div>
-                <button class="modal-close-btn" id="btn-close-video">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-            </header>
-            
-            <div class="video-wrapper">
-                <video id="hls-video" controls autoplay playsinline></video>
-                <div class="video-loader" id="video-loader">
-                    <div class="spinner"></div>
-                    <span>Loading Live Stream...</span>
-                </div>
-                <div class="video-error-message" id="video-error-msg">
-                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#ff4a4a" stroke-width="2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                    <h4>Playback Failed</h4>
-                    <p id="video-error-text">This stream cannot be played, likely due to network issues or browser CORS blocks.</p>
-                    <a id="btn-open-external" href="#" target="_blank" class="btn btn-secondary" style="margin-top: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        <span>Open in Browser</span>
-                    </a>
-                </div>
-            </div>
+            <h2>Platform Offline</h2>
+            <p>ShutyMedia is temporarily paused. We are undergoing scheduled enhancements and will be back online shortly.</p>
         </div>
     </div>
 
-
-
-    <!-- JS Link -->
-    <script src="app.js"></script>
+    <!-- Background stars effect -->
+    <script>
+        function generateStarfield() {
+            const starsContainer = document.getElementById('stars-container');
+            const starCount = 60;
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.width = `${Math.random() * 2}px`;
+                star.style.height = star.style.width;
+                star.style.backgroundColor = '#ffffff';
+                star.style.borderRadius = '50%';
+                star.style.opacity = Math.random() * 0.7;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                starsContainer.appendChild(star);
+            }
+        }
+        generateStarfield();
+    </script>
 </body>
 </html>
