@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/((?!assets/|style\\.css|maintenance\\.html|api/).*)", "destination": "/maintenance.html" },
     { "source": "/analytics", "destination": "/404" },
     { "source": "/analytics.html", "destination": "/404" },
     { "source": "/api/analytics/(.*)", "destination": "/api/analytics.js" },
