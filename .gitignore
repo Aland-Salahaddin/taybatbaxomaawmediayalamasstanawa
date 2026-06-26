@@ -3,3 +3,4 @@ node_modules/
 *.log
 test_blacklist.py
 get_yariga_logo.py
+analytics_db.json

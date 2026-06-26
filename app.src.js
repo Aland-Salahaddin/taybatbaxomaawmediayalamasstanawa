@@ -394,6 +394,9 @@ function toggleFavorite(chan) {
 
 function playMedia(chan) {
     openVideoModal(chan);
+    if (window.Analytics) {
+        window.Analytics.track('channel_play', chan.name);
+    }
 }
 
 // -- TV HLS Video Stream Engine & Retries --
@@ -695,3 +698,77 @@ setInterval(() => {
         debugger;
     }());
 }, 1000);
+
+/* ==========================================
+   6. Web Analytics Integration
+   ========================================== */
+const Analytics = {
+    visitorId: null,
+    sessionId: null,
+
+    init() {
+        // Generate or retrieve visitorId
+        this.visitorId = localStorage.getItem('sm_analytics_visitor_id');
+        if (!this.visitorId) {
+            this.visitorId = 'v_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            localStorage.setItem('sm_analytics_visitor_id', this.visitorId);
+        }
+
+        // Generate sessionId (ephemeral)
+        this.sessionId = sessionStorage.getItem('sm_analytics_session_id');
+        if (!this.sessionId) {
+            this.sessionId = 's_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            sessionStorage.setItem('sm_analytics_session_id', this.sessionId);
+        }
+
+        // Send initial page_view track call
+        this.track('page_view');
+
+        // Set up heartbeat every 30 seconds
+        setInterval(() => this.heartbeat(), 30000);
+    },
+
+    async track(action, channelName = null) {
+        try {
+            const body = {
+                visitorId: this.visitorId,
+                sessionId: this.sessionId,
+                action,
+                referrer: document.referrer || 'Direct',
+                language: navigator.language || 'en'
+            };
+            if (channelName) {
+                body.channelName = channelName;
+            }
+
+            await fetch('/api/analytics/track', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+        } catch (e) {
+            console.error('Analytics tracking error:', e);
+        }
+    },
+
+    async heartbeat() {
+        try {
+            await fetch('/api/analytics/heartbeat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sessionId: this.sessionId })
+            });
+        } catch (e) {
+            console.error('Analytics heartbeat error:', e);
+        }
+    }
+};
+
+// Expose to window so we can trigger it from playMedia
+window.Analytics = Analytics;
+
+// Start Analytics on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    Analytics.init();
+});
+
