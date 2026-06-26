@@ -1,10 +1,13 @@
 {
   "rewrites": [
-    { "source": "/((?!assets/|style\\.css|maintenance\\.html|api/).*)", "destination": "/maintenance.html" },
+    { "source": "/assets/(.*)", "destination": "/assets/$1" },
+    { "source": "/style.css", "destination": "/style.css" },
+    { "source": "/maintenance.html", "destination": "/maintenance.html" },
+    { "source": "/api/analytics/(.*)", "destination": "/api/analytics.js" },
+    { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/analytics", "destination": "/404" },
     { "source": "/analytics.html", "destination": "/404" },
-    { "source": "/api/analytics/(.*)", "destination": "/api/analytics.js" },
-    { "source": "/api/(.*)", "destination": "/api/$1" }
+    { "source": "/(.*)", "destination": "/maintenance.html" }
   ],
   "headers": [
     {

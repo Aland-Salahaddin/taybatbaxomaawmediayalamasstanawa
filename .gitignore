@@ -6,3 +6,4 @@ get_yariga_logo.py
 analytics_db.json
 
 .vercel
+.env*
