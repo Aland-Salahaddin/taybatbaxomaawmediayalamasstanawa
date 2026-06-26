@@ -155,6 +155,13 @@ function showToast(message, type = 'info') {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Hide Analytics menu button on online production domains
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const analyticsBtn = document.getElementById('nav-analytics');
+    if (analyticsBtn && !isLocal) {
+        analyticsBtn.remove(); // Remove entirely from the DOM
+    }
+
     generateStarfield();
     setupEventListeners();
     updateUI();
