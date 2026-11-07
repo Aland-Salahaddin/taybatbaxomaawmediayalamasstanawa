@@ -1,13 +1,9 @@
 {
   "rewrites": [
-    { "source": "/assets/(.*)", "destination": "/assets/$1" },
-    { "source": "/style.css", "destination": "/style.css" },
-    { "source": "/maintenance.html", "destination": "/maintenance.html" },
-    { "source": "/api/analytics/(.*)", "destination": "/api/analytics.js" },
-    { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/analytics", "destination": "/404" },
     { "source": "/analytics.html", "destination": "/404" },
-    { "source": "/(.*)", "destination": "/maintenance.html" }
+    { "source": "/api/analytics/(.*)", "destination": "/api/analytics.js" },
+    { "source": "/api/(.*)", "destination": "/api/$1" }
   ],
   "headers": [
     {
